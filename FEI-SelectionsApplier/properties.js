@@ -1,6 +1,7 @@
 define(['jquery','underscore','qlik','ng!$q'], function ($, _, qlik, $q) {
     var getFieldList = function () {
         var defer = $q.defer();
+        var app = qlik.currApp(this);
         app.getList( 'FieldList', function (items) {
             defer.resolve( items.qFieldList.qItems.map( function (item) {
                 return {

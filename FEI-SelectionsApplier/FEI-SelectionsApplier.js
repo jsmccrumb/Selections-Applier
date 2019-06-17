@@ -1,8 +1,9 @@
 define(['jquery', 'qlik', 'css!./FEI-SelectionsApplier.css', './properties'], function ($, qlik, cssContent, properties) {
     return {
+        console.log(properties);
         definition: properties,
         paint: function ($element, layout, jquery,properties) {
-            app = qlik.currApp();
+            var app = qlik.currApp();
             console.log(layout);
             var buttonHTMLCode = '<button name="ApplySelections" id="applySelections-'+layout.qInfo.qId+'" class="applySelections">Apply Selections'+((layout.field=='')?'':' to '+ layout.field)+'</button>';
             var textboxHTMLCode = '<textarea id="selectionsTextboxArea-'+layout.qInfo.qId+'" style="height: 90%;width: 90%;font-size: 10px;"></textarea>';
@@ -15,7 +16,7 @@ define(['jquery', 'qlik', 'css!./FEI-SelectionsApplier.css', './properties'], fu
 //Helper funciton for adding on a "qv-activate" event of button/link
 var addOnActivateButtonEvent = function ($element,layout,app) {
     $("#applySelections-"+layout.qInfo.qId).on('qv-activate', function () {
-        console.log(0);
+        console.log(layout.field);
         var selectionsInput = document.getElementById("selectionsTextboxArea-"+layout.qInfo.qId).value.split('\n');
         selectionsInput = selectionsInput.filter(function(n){ return n != "" });
         selections = layout.isNumeric ? selectionsInput.map(function(item){return parseFloat(item);}) : selectionsInput;
