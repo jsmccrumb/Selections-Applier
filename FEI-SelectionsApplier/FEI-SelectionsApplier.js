@@ -14,7 +14,8 @@ define(['jquery', 'qlik', 'css!./FEI-SelectionsApplier.css', './properties'], fu
 
             selectionsInput = uniq(selectionsInput);
             var selections = layout.isNumeric ? selectionsInput.map(function(item){return parseFloat(item);}) : selectionsInput;
-            app.field(layout.field).selectValues(selections, true,true);
+            //Defaults to NOT toggling
+            app.field(layout.field).selectValues(selections, false, true);
         });
     };
     return {
